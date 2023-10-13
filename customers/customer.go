@@ -3,6 +3,7 @@ package customers
 import (
 	"encoding/json"
 	"github.com/gorilla/mux"
+	"io/ioutil"
 	"net/http"
 	"strconv"
 )
@@ -97,7 +98,8 @@ func CreateCustomer(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 
 	var customer Customer
-	err := json.NewDecoder(r.Body).Decode(&customer)
+	reqBody, _ := ioutil.ReadAll(r.Body)
+	err := json.Unmarshal(reqBody, &customer)
 	if err != nil {
 		return
 	}
@@ -115,7 +117,8 @@ func UpdateCustomer(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 
 	var customer Customer
-	err := json.NewDecoder(r.Body).Decode(&customer)
+	reqBody, _ := ioutil.ReadAll(r.Body)
+	err := json.Unmarshal(reqBody, &customer)
 	if err != nil {
 		return
 	}
