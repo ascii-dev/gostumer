@@ -9,10 +9,11 @@ import (
 
 type Customer struct {
 	Id        string `json:"id"`
-	FirstName string `json:"first_name"`
-	LastName  string `json:"last_name"`
+	Name      string `json:"name"`
+	Role      string `json:"role"`
 	Email     string `json:"email"`
 	Phone     string `json:"phone"`
+	Contacted bool   `json:"contacted"`
 }
 
 type ErrorResponse struct {
@@ -24,11 +25,36 @@ var customers []Customer
 func Init() {
 	customers = append(
 		customers,
-		Customer{Id: "1", FirstName: "John", LastName: "Doe", Email: "john.doe@gmail.com", Phone: "1234567890"},
+		Customer{
+			Id:        "1",
+			Name:      "John Doe",
+			Role:      "Software Developer",
+			Email:     "john.doe@gmail.com",
+			Phone:     "1234567890",
+			Contacted: true,
+		},
 	)
 	customers = append(
 		customers,
-		Customer{Id: "2", FirstName: "Jane", LastName: "Doe", Email: "jane.doe@gmail.com", Phone: "1234567890"},
+		Customer{
+			Id:        "2",
+			Name:      "Jane Doe",
+			Role:      "Digital Marketer",
+			Email:     "jane.doe@gmail.com",
+			Phone:     "1234567890",
+			Contacted: false,
+		},
+	)
+	customers = append(
+		customers,
+		Customer{
+			Id:        "3",
+			Name:      "Terry Doe",
+			Role:      "User Experience Designer",
+			Email:     "terry.doe@gmail.com",
+			Phone:     "1234567890",
+			Contacted: true,
+		},
 	)
 }
 
