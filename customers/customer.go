@@ -83,6 +83,11 @@ func GetSingleCustomer(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if id < 0 || id > len(customers) {
+		w.WriteHeader(http.StatusNotFound)
+		err = json.NewEncoder(w).Encode(ErrorResponse{Message: "Customer does not exist"})
+	}
+
 	err = json.NewEncoder(w).Encode(customers[id-1])
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
@@ -132,6 +137,11 @@ func UpdateCustomer(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		return
+	}
+
+	if id < 0 || id > len(customers) {
+		w.WriteHeader(http.StatusNotFound)
+		err = json.NewEncoder(w).Encode(ErrorResponse{Message: "Customer does not exist"})
 	}
 
 	customer.Id = strconv.Itoa(id)
